@@ -16,7 +16,11 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      # --ignore-scripts：esbuild 的 postinstall 会 spawn 子进程，
+      # 在 Actions 上会触发 npm 的 "Exit handler never called" 崩溃。
+      # 项目不依赖任何 postinstall 产物（esbuild 平台二进制走 optionalDependencies），
+      # 顺带也避免执行依赖里的任意安装脚本。
+      - run: npm ci --ignore-scripts
 
       - name: 类型检查
         run: npm run typecheck
