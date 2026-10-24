@@ -16,11 +16,15 @@ jobs:
           node-version: 22
           cache: npm
 
-      # --ignore-scripts：esbuild 的 postinstall 会 spawn 子进程，
-      # 在 Actions 上会触发 npm 的 "Exit handler never called" 崩溃。
-      # 项目不依赖任何 postinstall 产物（esbuild 平台二进制走 optionalDependencies），
-      # 顺带也避免执行依赖里的任意安装脚本。
-      - run: npm ci --ignore-scripts
+      # runner 自带的 npm 10.9.9 在这里会直接以 "Exit handler never called" 崩掉
+      # （零输出、启动阶段即退出），先升级到最新 npm。
+      - name: 升级 npm
+        run: npm install -g npm@latest
+
+      # --ignore-scripts：项目不依赖任何 postinstall 产物
+      # （esbuild 平台二进制走 optionalDependencies，electron 二进制由 electron-builder 自己下载），
+      # 同时避免执行第三方依赖的任意安装脚本。
+      - run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: 类型检查
         run: npm run typecheck
