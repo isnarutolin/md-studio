@@ -1,0 +1,17 @@
+# 依赖与构建产物
+node_modules/
+dist/
+release/
+
+# macOS 生成的 .iconset 中间产物（最终 .icns 已提交）
+build/*.iconset/
+
+# 系统 / 编辑器
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# 本地环境
+.env
+.env.local

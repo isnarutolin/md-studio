@@ -1,0 +1,147 @@
+{
+  "name": "md-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "serve": "node scripts/serve.mjs",
+    "agent:install": "node scripts/install-agent.mjs install",
+    "agent:remove": "node scripts/install-agent.mjs remove",
+    "agent:status": "node scripts/install-agent.mjs status",
+    "app": "npm run build && electron .",
+    "app:dev": "MD_DEV=1 electron .",
+    "dist": "npm run build && electron-builder",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.18.6",
+    "@codemirror/commands": "^6.8.1",
+    "@codemirror/lang-markdown": "^6.3.2",
+    "@codemirror/language": "^6.11.0",
+    "@codemirror/language-data": "^6.5.1",
+    "@codemirror/search": "^6.5.11",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/view": "^6.36.5",
+    "@lezer/highlight": "^1.2.1",
+    "@lezer/markdown": "^1.4.2"
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.2.4",
+    "vitest": "^5.0.5"
+  },
+  "main": "electron/main.cjs",
+  "description": "自己的 Markdown 工作台：块级即时渲染，浏览 / 修订 / 管理本地 md 文件夹",
+  "author": {
+    "name": "narutolin",
+    "url": "https://github.com/isnarutolin"
+  },
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "editor",
+    "electron",
+    "codemirror",
+    "wysiwyg",
+    "notes",
+    "knowledge-base"
+  ],
+  "homepage": "https://github.com/isnarutolin/md-studio#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isnarutolin/md-studio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isnarutolin/md-studio/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "build": {
+    "appId": "io.github.mdstudio.app",
+    "productName": "MD Studio",
+    "copyright": "Copyright © 2025 narutolin",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "!**/*.map",
+      "!**/node_modules/**/*"
+    ],
+    "asar": true,
+    "fileAssociations": [
+      {
+        "ext": [
+          "md",
+          "markdown",
+          "mdx"
+        ],
+        "name": "Markdown Document",
+        "description": "Markdown Document",
+        "role": "Editor"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/MDStudio.icns",
+      "darkModeSupport": true
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/MDStudio.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Office",
+      "icon": "build/icons"
+    }
+  }
+}

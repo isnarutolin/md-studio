@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#b3541e" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="MD Studio" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="./icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <title>MD Studio</title>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn" id="btn-sidebar" title="侧栏 (⌘\)">☰</button>
+        <span class="brand">MD<span class="brand-dot">·</span>Studio</span>
+        <button class="chip ghost" id="btn-workspace" title="打开文件夹 (⌘⇧O)">
+          <span id="ws-name">未打开工作区</span>
+        </button>
+        <button class="icon-btn" id="btn-open-file-top" title="新建 / 打开 (⌘N)">＋</button>
+      </div>
+      <div class="topbar-center">
+        <button class="quickopen-hint" id="btn-quickopen" title="快速打开 (⌘P)">
+          <span class="qo-icon">⌕</span><span>快速打开</span><kbd>⌘P</kbd>
+        </button>
+      </div>
+      <div class="topbar-right">
+        <span class="stat" id="stat"></span>
+        <span class="save-state" id="save-state"></span>
+        <button class="chip" id="btn-read" title="阅读模式 (⌘⇧R)">阅读</button>
+        <button class="chip" id="btn-focus" title="专注模式 (⌘⇧F)">专注</button>
+        <button class="chip" id="btn-raw" title="源码模式 (⌘E)">源码</button>
+        <button class="chip" id="btn-theme" title="切换主题 (⌘⇧L)">◐</button>
+        <button class="chip" id="btn-export" title="导出 HTML">导出</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" id="sidebar">
+        <div class="side-tabs">
+          <button class="side-tab active" data-panel="files">文件</button>
+          <button class="side-tab" data-panel="search">搜索</button>
+          <button class="side-tab" data-panel="outline">大纲</button>
+        </div>
+
+        <div class="side-panel" data-panel="files">
+          <div class="tree-toolbar">
+            <button class="mini-btn" id="btn-newfile" title="新建文档">＋</button>
+            <button class="mini-btn" id="btn-newfolder" title="新建文件夹">▤</button>
+            <button class="mini-btn" id="btn-refresh" title="重新扫描工作区">⟳</button>
+            <span class="tree-count" id="tree-count"></span>
+          </div>
+          <div class="tree" id="tree"></div>
+          <div class="tree-footer" id="tree-footer" hidden>
+            <span class="tree-footer-text" id="tree-footer-text"></span>
+            <button class="mini-link" id="btn-deepen">扫描子目录</button>
+          </div>
+          <div class="recent-wrap" id="recent-wrap" hidden>
+            <div class="recent-head">最近打开</div>
+            <div class="recent" id="recent"></div>
+          </div>
+          <div class="side-empty" id="tree-empty">
+            还没有打开工作区<br />
+            <div class="side-empty-actions">
+              <button class="welcome-btn small" id="btn-open-dir">打开文件夹</button>
+              <button class="welcome-btn small ghost" id="btn-open-file">打开单个文件</button>
+            </div>
+            <div class="side-empty-tip">单文件也能直接保存回原位置</div>
+            <div class="side-empty-note" hidden></div>
+          </div>
+        </div>
+
+        <div class="side-panel hidden" data-panel="search">
+          <div class="search-box">
+            <input id="search-input" type="search" placeholder="全文搜索…" autocomplete="off" />
+          </div>
+          <div class="search-meta" id="search-meta"></div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+
+        <div class="side-panel hidden" data-panel="outline">
+          <nav class="outline" id="outline"></nav>
+        </div>
+
+        <div class="sidebar-foot">
+          <div class="hint" id="side-hint">拖拽 .md 文件到窗口可临时打开</div>
+        </div>
+      </aside>
+
+      <main class="editor-pane" id="editor-pane">
+        <div class="doc-head" id="doc-head">
+          <span class="doc-title" id="doc-title">未命名.md</span>
+          <span class="doc-dirty" id="doc-dirty" hidden>●</span>
+          <span class="doc-path" id="doc-path"></span>
+        </div>
+        <div id="editor"></div>
+
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon">◫</div>
+          <h1>把 Markdown 文件夹交给它</h1>
+          <p>浏览、修订、管理都在同一个界面里完成。文件留在原地，不导入、不迁移。</p>
+          <div class="welcome-actions">
+            <button class="welcome-btn" id="welcome-open">打开文件夹</button>
+            <button class="welcome-btn ghost" id="welcome-open-file">打开单个文件</button>
+          </div>
+          <div class="welcome-sub">只改一篇文档？⌘O 直接开文件，⌘S 存回原位置。</div>
+          <div class="welcome-recent" id="welcome-recent"></div>
+          <div class="welcome-tips">
+            <span><kbd>⌘P</kbd> 快速打开</span>
+            <span><kbd>⌘⇧F</kbd> 全文搜索</span>
+            <span><kbd>⌘⇧R</kbd> 阅读模式</span>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- 快速打开 -->
+    <div class="palette-mask" id="palette-mask" hidden>
+      <div class="palette">
+        <input id="palette-input" type="text" placeholder="输入文件名或路径…" autocomplete="off" spellcheck="false" />
+        <div class="palette-list" id="palette-list"></div>
+      </div>
+    </div>
+
+    <div class="drop-mask" id="drop-mask"><div>松手打开 Markdown 文件</div></div>
+    <input type="file" id="file-input" accept=".md,.markdown,.mdx,.txt" hidden />
+  </body>
+</html>
