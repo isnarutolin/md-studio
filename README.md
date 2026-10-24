@@ -58,7 +58,7 @@
 
 ## 从源码构建
 
-需要 Node.js ≥ 20。
+需要 Node.js ≥ 22.12（`electron@45` 与 `vitest@5` 的要求）。
 
 ```bash
 git clone https://github.com/isnarutolin/md-studio.git
