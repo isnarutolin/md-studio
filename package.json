@@ -56,13 +56,13 @@
     "notes",
     "knowledge-base"
   ],
-  "homepage": "https://github.com/isnarutolin/md-studio#readme",
+  "homepage": "https://github.com/isnarutolin/md-workspace#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/isnarutolin/md-studio.git"
+    "url": "https://github.com/isnarutolin/md-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/isnarutolin/md-studio/issues"
+    "url": "https://github.com/isnarutolin/md-workspace/issues"
   },
   "engines": {
     "node": ">=22.12"

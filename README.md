@@ -40,6 +40,14 @@
 2. **语法符号淡色浮现** —— 不是粗暴隐藏，你始终知道自己写了什么
 3. **渲染块点一下就回到源码** —— 表格、复选框、frontmatter 卡片都能直接点进去改
 
+## 先试试
+
+不想装 100MB 的话，直接打开在线版（Chrome / Edge）：
+
+**https://isnarutolin.github.io/md-workspace/**
+
+同一套渲染引擎，免安装。区别是浏览器拿不到文件所在目录，单文件模式下相对路径图片会显示为占位。
+
 ## 下载
 
 到 [Releases](../../releases) 下载对应平台的安装包：
@@ -64,8 +72,8 @@
 需要 Node.js ≥ 22.12（`electron@45` 与 `vitest@5` 的要求）。
 
 ```bash
-git clone https://github.com/isnarutolin/md-studio.git
-cd md-studio
+git clone https://github.com/isnarutolin/md-workspace.git
+cd md-workspace
 npm install
 npm run build
 npm run app        # 直接以桌面客户端运行

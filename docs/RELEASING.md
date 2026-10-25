@@ -37,12 +37,12 @@ git push origin main && git push origin v0.2.0
 ```bash
 # 产物类型对不对（不用整个下载，只取头部魔数）
 for f in MD.Studio.Setup.0.2.0.exe MD.Studio-0.2.0.AppImage; do
-  curl -sL -r 0-3 "https://github.com/isnarutolin/md-studio/releases/download/v0.2.0/$f" | xxd -p
+  curl -sL -r 0-3 "https://github.com/isnarutolin/md-workspace/releases/download/v0.2.0/$f" | xxd -p
 done
 # PE = 4d5a...   ELF = 7f454c46
 
 # 网页版是否活着
-curl -s -o /dev/null -w '%{http_code}\n' https://isnarutolin.github.io/md-studio/
+curl -s -o /dev/null -w '%{http_code}\n' https://isnarutolin.github.io/md-workspace/
 ```
 
 macOS 的 dmg 建议真机走一遍完整流程：
