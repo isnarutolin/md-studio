@@ -46,10 +46,13 @@
 
 | 平台 | 文件 |
 | --- | --- |
-| macOS（Apple Silicon） | `MD Studio-x.y.z-arm64.dmg` |
-| macOS（Intel） | `MD Studio-x.y.z.dmg` |
-| Windows | `MD Studio Setup x.y.z.exe` |
-| Linux | `MD Studio-x.y.z.AppImage` |
+| macOS（Apple Silicon） | `MD.Studio-0.1.0-arm64.dmg` |
+| macOS（Intel） | `MD.Studio-0.1.0.dmg` |
+| Windows | `MD.Studio.Setup.0.1.0.exe` |
+| Linux | `MD.Studio-0.1.0.AppImage` |
+
+> 文件名由 electron-builder 生成，版本号随 release 变化。macOS 也提供 `.zip`（免拖拽安装）。
+> macOS 上把 `.app` 拖进 `/Applications` 即可；Linux 的 AppImage 需要先 `chmod +x`。
 
 > **未签名说明**：项目没有购买代码签名证书。
 > macOS 首次打开若提示"未验证的开发者"，**右键 → 打开**即可；或执行
@@ -142,6 +145,7 @@ npm run app:dev    # 在 Electron 里热调试
 ```
 
 改动渲染引擎时请特别注意 [docs/DESIGN.md](docs/DESIGN.md) 里记录的几个 CodeMirror 陷阱。
+维护者发版流程见 [docs/RELEASING.md](docs/RELEASING.md)，版本变化见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 许可
 
